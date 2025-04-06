@@ -1,0 +1,8 @@
+You can test with the Admin account or user account (Also can register new one user account)
+Admin account Name: admin
+Admin account Password: admin
+
+test user account Name: ksy0406
+test user account Password: kellysy0406
+
+(Please dont close profile form when you are testing) 
