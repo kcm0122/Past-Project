@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/framelayout_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment_home">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:layout_editor_absoluteX="-157dp"
+        tools:layout_editor_absoluteY="32dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/textview"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <TextView
+                    android:id="@+id/logo"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_weight="6"
+                    android:text="Quizlet"
+                    android:textColor="@color/textUN_PW"
+                    android:textSize="36sp" />
+
+                <ImageButton
+                    android:id="@+id/inform"
+                    android:layout_width="52dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="5dp"
+                    android:background="@null"
+                    app:srcCompat="@drawable/homefrag_noti_icon" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Achievements"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:gravity="bottom"
+                    android:text="Achievements"
+                    android:textColor="@color/text"
+                    android:textSize="24sp" />
+
+                <ImageButton
+                    android:id="@+id/im_ach"
+                    android:layout_width="match_parent"
+                    android:layout_height="410dp"
+                    android:background="@color/background"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/homefrag_ach" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="15dp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:weightSum="6">
+
+                <TextView
+                    android:id="@+id/Study_sets"
+                    android:layout_width="279dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:gravity="bottom"
+                    android:text="Study sets"
+                    android:textColor="@color/text"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/home_C1"
+                        android:layout_width="306dp"
+                        android:layout_height="163dp"
+                        android:layout_margin="20dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/textview"
+                        app:cardCornerRadius="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/StudysetT1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:baselineAligned="false"
+                                android:padding="20dp"
+                                android:text="Empty "
+                                android:textColor="@color/text"
+                                android:textSize="24sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <ImageButton
+                                    android:id="@+id/Study_set_del"
+                                    android:layout_width="83dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    android:backgroundTint="@color/design_default_color_error"
+                                    android:src="@drawable/homefrag_studyset_del" />
+
+                                <TextView
+                                    android:id="@+id/T1_author"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:paddingTop="20dp"
+                                    android:textColor="@color/text"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/home_C2"
+                        android:layout_width="306dp"
+                        android:layout_height="163dp"
+                        android:layout_margin="20dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/textview"
+                        app:cardCornerRadius="20dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/StudysetT2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:baselineAligned="false"
+                                android:padding="20dp"
+                                android:text="Empty "
+                                android:textColor="@color/text"
+                                android:textSize="24sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+                                <ImageButton
+                                    android:id="@+id/study_set_del2"
+                                    android:layout_width="89dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    android:backgroundTint="@color/design_default_color_error"
+                                    android:src="@drawable/homefrag_studyset_del" />
+
+                                <TextView
+                                    android:id="@+id/T2_author"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:paddingTop="20dp"
+                                    android:textColor="@color/text"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</FrameLayout>
