@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <title>Remote legal consultant</title>
+      <!--css -->
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/style.css">
+	   <link rel="stylesheet" href="chatbot/css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   </head>
+   
+<!-- body -->
+   <body class="main-layout">
+      <div class="full_bg">
+         <!-- header -->
+         <header class="header-area">
+            <div class="container">
+               <div class="row d_flex">
+                 <div class=" col-md-3 col-sm-3">
+                     <div class="logo">
+                        <a href="index.html">Legal con.</a>
+                    </div>
+                  </div>
+                  <div class="col-md-9 col-sm-9">
+                     <div class="navbar-area">
+                        <nav class="site-navbar">
+                           <ul>
+                              <li><a class="active" href="index.html">Home</a></li>
+                              <li><a href="about.html">About</a></li>
+                              <li><a href="service.html">Service</a></li>
+							   <li><a href="index_chi.html">Chinese Version</a></li>
+                           
+                           </ul>
+                        </nav>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </header>
+         
+		  <!-- top -->
+         <div class="banner_main"/>
+                     <div class="container">
+                        <div class="relative">
+                           <div class="row d_flex">
+                              <div class="col-md-5">
+                                 <div class="banner">
+                                    <h1>Legal Consulting </h1>
+                                    <p>Provide professional and cheap online legal suggestions. If you have any simple legal questions, you can use our free AI Chatbot to get answers or book the consultation time </p>
+                                    <a class="button_or" href="about.html">More About</a>
+                                </div>
+                              </div>
+                              <div class="col-md-7">
+                                       <div class="banner_image">
+                                         <figure><img src="images/bannerimg.jpg"/></figure>                                                                     
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+               
+  
+      <!-- services -->
+      <div class="services">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="titlepage text_align_center ">
+                     <h2>Our Services</h2>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-4">
+                  <div id="detail" class="services_box text_align_left">
+                     <h3>Legal Consultation 1:1</h3>
+                     <figure><img src="images/consultion.jpg" /></figure>
+                     <p align="justify">Connect with verified lawyers according to your booking via an online video App.You can ask about any legal issue with our lawyer</p>
+                     <a class="button_or" href="service.html">Read Detail</a>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div id="detail" class="services_box text_align_left">
+                     <h3>Smail Legal Support</h3>
+                     <figure><img src="images/support.jpg" /></figure>
+                    <p align="justify">Provide small legal support such as small claims court, so you have the confidence you need to present your case and requirements.(not include criminal)</p>
+                     <a class="button_or" href="service.html">Read Detail</a>
+                 </div>
+               </div>
+               <div class="col-md-4">
+                  <div id="detail" class="services_box text_align_left">
+                     <h3>Legal document Prepare</h3>
+                     <figure><img src="images/docu.jpg" /></figure>
+                     <p align="justify">Get help to write important legal documents such as a will, make a power of attorney, prepare a healthcare directive, and create a trust etc.</p>
+                     <a class="button_or" href="service.html">Read Detail</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+     
+     
+	<!-- chatbot-->
+    <!-- CHAT BAR BLOCK -->
+    <div class="chat-bar-collapsible">
+        <button id="chat-button" type="button" class="collapsible">AI Chatbot
+            <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+        </button>
+        <div class="content">
+            <div class="full-chat-block">
+                <!-- Message Container -->
+                <div class="outer-container">
+                    <div class="chat-container">
+                        <!-- Messages -->
+                        <div id="chatbox">
+                            <h5 id="chat-timestamp"></h5>
+                            <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                        </div>
+                        <!-- input -->
+                        <div class="chat-bar-input-block">
+                            <div id="userInput">
+                                <input id="textInput" class="input-box" type="text" name="msg"
+                                    placeholder="Tap 'Enter' to send a message">
+                                <p></p>
+                            </div>
+                            <div class="chat-bar-icons">
+                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+                                    onclick="sendButton()"></i>
+                            </div>
+                        </div>
+                        <div id="chat-bar-bottom">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+	   <!--  footer -->
+      <footer>
+         <div class="footer">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-7">
+                    <div class="row">
+                      <div class="col-lg-6 col-md-12">
+                           <div class="hedingh3 text_align_left">
+                             <p>Legal con.</p>
+                         </div>
+                        </div>
+                        </div>						 
+                     </div>					  
+                  </div>
+                  </div>				
+               </div>
+            
+      </footer>
+	   <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery-3.0.0.min.js"></script>
+	   <script src="chatbot/scripts/chat.js"></script>
+   </body>
+	
+</html>

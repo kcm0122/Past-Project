@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <!-- site metas -->
+      <title>Remote legal consultant</title>
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/style.css">
+	  <link rel="stylesheet" href="chatbot/css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   </head>
+   <!-- body -->
+   <body class="main-layout inner_page">
+      <div class="full_bg">
+         <!-- header -->
+         <header class="header-area">
+            <div class="container">
+               <div class="row d_flex">
+                  <div class=" col-md-3 col-sm-3">
+                     <div class="logo">
+                        <a href="index.html">Legal con.</a>
+                     </div>
+                  </div>
+                  <div class="col-md-9 col-sm-9">
+                     <div class="navbar-area">
+                        <nav class="site-navbar">
+                           <ul>
+                              <li><a href="index.html">Home</a></li>
+                              <li><a href="about.html">About</a></li>
+                              <li><a class="active" href="service.html">Service</a></li>
+							   <li><a href="index_chi.html">Chinese Version</a></li> 
+                           </ul>
+                        </nav>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </header>
+         <!-- end header inner -->
+      </div>
+
+  
+	   <!-- services -->
+      <div class="services">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="titlepage text_align_center ">
+                     <h2>Details for Our Services</h2>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-4">
+                  <div id="detail" class="services_box text_align_left">
+                     <h3>Legal Consultant 1:1  </h3>
+                     <figure><img src="images/consultion.jpg" /></figure>
+                    
+					<ul>
+					  <li>Price : $100/per </li>
+					  <li>Face to face or online meeting</li>
+					  <li>Arrange services at any time</li>
+					  <li>Advice for any type of legal problems</li>
+					  <li>No second charges during meetings</li>
+                 <li>Serviced by professional lawyer</li>
+					 <li>All information will be treated as strictly confidential </li>
+					  </ul><p></p>
+                     <a class="button_or" href="appointment.html">Let book</a>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div id="detail" class="services_box text_align_left">
+                     <h3>Simple Legal Support</h3>
+                     <figure><img src="images/support.jpg" /></figure>
+                    <ul>
+					  <li>Price : $350</li>
+					  <li>Face to face or online meeting</li>
+					  <li>Provide professional legal assistance</li>
+					  <li>Avilable for all type of legal problems</li>
+                 <li>Promote early resolution for legal problems</li>
+                 <li>Serviced by professional lawyer</li>
+					 <li>All information will be treated as strictly confidential </li>
+					  </ul>
+					  <p> </p>
+			
+                     <a class="button_or" href="appointment.html">Let book</a>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div id="detail" class="services_box text_align_left">
+                     <h3>Legal document Prepare</h3>
+                     <figure><img src="images/docu.jpg" /></figure>
+                    <ul>
+					  <li>Price : $150/per</li>
+					  <li>Assist in documents preparation</li>
+					  <li>Step by  instruction on preparation</li>
+					  <li>Draft  legal documents for you</li>
+					  <li>Avilable for all type of legal documents</li>
+					  <li>Serviced by professional lawyer</li>
+					 <li>All information will be treated as strictly confidential </li>
+					  </ul><p> </p>
+                     <a class="button_or" href="appointment.html">Let book</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end services -->
+    
+	 <!-- chatbot-->
+    <div class="chat-bar-collapsible">
+        <button id="chat-button" type="button" class="collapsible">AI Chatbot
+            <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i></button>
+       <!-- Message Container -->
+		<div class="content">
+            <div class="full-chat-block">   
+				 <!-- Messages -->
+                <div class="outer-container">
+                    <div class="chat-container">
+                        <div id="chatbox">
+                            <h5 id="chat-timestamp"></h5>
+                            <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                        </div>
+                        <!-- input -->
+                        <div class="chat-bar-input-block">
+                            <div id="userInput">
+                                <input id="textInput" class="input-box" type="text" name="msg"
+                                    placeholder="Tap 'Enter' to send a message">
+                                <p></p>
+                            </div>
+                            <div class="chat-bar-icons">
+                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+                                    onclick="sendButton()"></i>
+                            </div>
+                        </div>
+                        <div id="chat-bar-bottom">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	   <!--  footer -->
+      <footer>
+         <div class="footer">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-7">
+                    <div class="row">
+                      <div class="col-lg-6 col-md-12">
+                           <div class="hedingh3 text_align_left">
+                             <p>Legal con.</p>
+                         </div>
+                        </div>
+                        </div>						 
+                     </div>					  
+                  </div>
+                  </div>				
+               </div>
+            </div>
+      </footer>
+
+      <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery-3.0.0.min.js"></script> 
+	   <script src="chatbot/scripts/chat.js"></script>
+   </body>
+</html>

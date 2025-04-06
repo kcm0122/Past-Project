@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <!-- site metas -->
+      <title>Remote legal consultant</title>
+      <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link rel="stylesheet" href="css/style.css">
+	   <link rel="stylesheet" href="chatbot/css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+   </head>
+   <!-- body -->
+   <body class="main-layout inner_page">
+      <div class="full_bg">
+         <!-- header -->
+         <header class="header-area">
+            <div class="container">
+               <div class="row d_flex">
+                  <div class=" col-md-3 col-sm-3">
+                     <div class="logo">
+                        <a href="index_chi.html">Legal con.</a>
+                     </div>
+                  </div>
+                  <div class="col-md-9 col-sm-9">
+                     <div class="navbar-area">
+                        <nav class="site-navbar">
+                           <ul>
+                              <li><a href="index_chi.html">首頁</a></li>
+                              <li><a class="active" href="about_chi.html">關於</a></li>
+                              <li><a href="service_chi.html">服務</a></li>
+							   <li><a href="index.html">英文版本</a></li>
+                           </ul>
+                           <button class="nav-toggler">
+                           <span></span>
+                           </button>
+                        </nav>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </header>
+         <!-- end header inner -->
+      </div>
+   
+      <!-- about -->
+      <div class="about">
+         <div class="container_width">
+            <div class="row d_flex grig">
+               <div class="col-md-6">
+                  <div class="about_img">
+                     <figure><img src="images/about_img.jpg" />
+                     </figure>
+                  </div>
+               </div>
+               <div class="col-md-6 order">
+                  <div class="titlepage text_align_left">
+                     <h2>我們是誰?</h2>
+                     <p align="justify">我們的業務由眾多專業律師組成。 所有律師均經過驗證和許可。 傳統的面對面法律諮詢費時費錢，但並非所有問題都需要通過打官司來解決。 所以我們旨在以更低的價格和更少的時間成本為公眾提供在線法律諮詢服務。 希望可以通過我們的專業建議幫助公眾解決他們的法律問題。</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+	   <div class="about">
+         <div class="container_width">
+            <div class="row d_flex grig">
+               <div class="col-md-6">
+                  <div class="about_img">
+                     <figure><center><img src="images/about_img2.jpg"/></center>
+                     </figure>
+                  </div>
+               </div>
+               <div class="col-md-6 order">
+                 <div class="titlepage text_align_left">
+                     <h2>我們的律師都有:</h2>
+				   <p align="justify"><ul>
+				     <li>法學專業證書(P.C.LL)</li>
+				     <li>海外律師認證</li>
+				     <li>超過5年的工作經驗</li>
+				     </ul></p>
+                  </div>
+               </div>
+            </div>
+         </div>
+	   <div class="about">
+	     <div class="container_width">
+            <div class="row d_flex grig">
+               <div class="col-md-6">
+                 <div class="about_img">
+                     <figure><img src="images/about_img3.jpg" />
+                     </figure>
+                  </div>
+               </div>
+               <div class="col-md-6 order">
+                 <div class="titlepage text_align_left">
+                     <h2>聯繫方法&nbsp;</h2>
+				   <p align="justify"><ul>
+				     <li>Email : Legalcon@abc.com</li>
+				     <li>電話 : +852 12345678</li>
+					 </ul></p>
+                 </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+    
+		<!-- chatbot-->
+    <!-- CHAT BAR BLOCK -->
+    <div class="chat-bar-collapsible">
+        <button id="chat-button" type="button" class="collapsible">AI Chatbot
+            <i id="chat-icon" style="color: #fff;" class="fa fa-fw fa-comments-o"></i>
+        </button>
+        <div class="content">
+            <div class="full-chat-block">
+                <!-- Message Container -->
+                <div class="outer-container">
+                    <div class="chat-container">
+                        <!-- Messages -->
+                        <div id="chatbox">
+                            <h5 id="chat-timestamp"></h5>
+                            <p id="botStarterMessage" class="botText"><span>Loading...</span></p>
+                        </div>
+                        <!-- input -->
+                        <div class="chat-bar-input-block">
+                            <div id="userInput">
+                                <input id="textInput" class="input-box" type="text" name="msg"
+                                    placeholder="Tap 'Enter' to send a message">
+                                <p></p>
+                            </div>
+                            <div class="chat-bar-icons">
+                                <i id="chat-icon" style="color: #333;" class="fa fa-fw fa-send"
+                                    onclick="sendButton()"></i>
+                            </div>
+                        </div>
+                        <div id="chat-bar-bottom">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+	<!--  footer -->
+    <footer>
+         <div class="footer">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-7">
+                    <div class="row">
+                      <div class="col-lg-6 col-md-12">
+                           <div class="hedingh3 text_align_left">
+                             <p>Legal con.</p>
+                         </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                          <div class="hedingh3 text_align_left">                           
+                           </div>
+                        </div>					 
+                     </div>					  
+                  </div>
+                  </div>			
+               </div>
+            </div>
+      </footer>
+
+      <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.bundle.min.js"></script>
+      <script src="js/jquery-3.0.0.min.js"></script>
+	   <script src="chatbot/scripts/chat - chi.js"></script>
+   </body>
+</html>
