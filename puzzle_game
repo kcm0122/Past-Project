@@ -1,0 +1,655 @@
+#include <iostream>
+#include<iomanip>
+#include<ctime>
+#include<cmath>
+#include<string>
+//#include<cstring>
+#include<stdlib.h>
+
+using namespace std;
+void end();
+void groupinfo();
+
+//variables
+const int DefaultPieces = 15;
+int DefaultRandomNumber = 5;
+int SIZE = DefaultPieces;
+char list[25] = { 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','R','S','T','U','V','W','X','Y','Z' };
+int numbers[25] = {};
+char entered[25] = {};
+bool won = false;
+bool gamending = false;
+int r1, r2, r3, r4;
+const int rsize = 18;
+const int csize = 18;
+char gboard[rsize][csize] = {};
+char pboard[rsize][csize] = {};
+int start_time;
+int end_time;
+
+void Getnum(int i){
+    //cout << "\ni: " << i << endl;
+    r1 = floor(numbers[i]/1000);
+    r2 = floor(numbers[i]/100)-floor(numbers[i]/1000)*10;
+    r3 = floor(numbers[i]/10)-floor(numbers[i]/100)*10;
+    r4 = numbers[i]-floor(numbers[i]/10)*10;
+}
+int GetPlace(char place[2]){
+    char char0 = place[0];
+    place[0] = toupper(char0);
+
+    if(place[1] == '1'){
+        if(place[0] == 'A') return 0;
+        else if(place[0] == 'B') return 1;
+        else if(place[0] == 'C') return 2;
+        else if(place[0] == 'D') return 3;
+        else if(place[0] == 'E') return 4;
+    }
+    else if(place[1] == '2'){
+        if(place[0] == 'A') return 5;
+        else if(place[0] == 'B') return 6;
+        else if(place[0] == 'C') return 7;
+        else if(place[0] == 'D') return 8;
+        else if(place[0] == 'E') return 9;
+    }
+    else if(place[1] == '3'){
+        if(place[0] == 'A') return 10;
+        else if(place[0] == 'B') return 11;
+        else if(place[0] == 'C') return 12;
+        else if(place[0] == 'D') return 13;
+        else if(place[0] == 'E') return 14;
+    }
+    else if(place[1] == '4'){
+        if(place[0] == 'A') return 15;
+        else if(place[0] == 'B') return 16;
+        else if(place[0] == 'C') return 17;
+        else if(place[0] == 'D') return 18;
+        else if(place[0] == 'E') return 19;
+    }
+    else if(place[1] == '5'){
+        if(place[0] == 'A') return 20;
+        else if(place[0] == 'B') return 21;
+        else if(place[0] == 'C') return 22;
+        else if(place[0] == 'D') return 23;
+        else if(place[0] == 'E') return 24;
+    }
+    return 99;
+}
+void PuzzleBoard(){
+    int letter = 65, space = 32, pls= 43, hyphen = 45 , verticalbar = 124 , num = 48;
+
+    for(int r = 0; r < rsize;r++){          //set array to all space
+        for(int c = 0; c < csize; c++){
+            pboard[r][c] = space;
+        }
+    }
+    for(int i = 1; i < csize; i++){         //for +---------------+'
+        if (i == 1 || i == csize - 1 ){     //for +
+            pboard[1][i] = pls;
+            pboard[rsize-1][i] = pls;
+        }
+        else
+        {                                   //for -
+            pboard[1][i] = hyphen;
+            pboard[rsize-1][i] = hyphen;
+        }
+    }
+    for(int i = 2 ; i < rsize -1 ; i++){    //for |||
+        pboard[i][1] = verticalbar;
+        pboard[i][csize-1] = verticalbar;
+    }
+
+    int r,c;                                //put player entered to board
+    for(r=0;r<=rsize;r++){
+        for(c=0;c<=csize;c++){
+            int minus = 65;
+            if(r%3 == 0 && c%3 == 0 && r != 0 && c != 0  && r != rsize && c != csize){
+                if(list[((r/3)*5)+(c/3)-6] < 65+SIZE){
+                    pboard[r][c] = list[((r/3)*5)+(c/3)-6];
+                }
+            }
+            else if((r+1)%3 == 0 && c%3 == 0 && r+1 != 0 && c != 0  && r+1 != rsize && c != csize){
+                if(list[(((r+1)/3)*5)+(c/3)-6] < 65+SIZE){
+                    if(list[(((r+1)/3)*5)+(c/3)-6] >= 'R') minus = 66;
+                    Getnum(list[(((r+1)/3)*5)+(c/3)-6]-minus);
+                    pboard[r][c] = r1 + 48;
+                }
+            }
+            else if(r%3 == 0 && (c-1)%3 == 0 && r != 0 && c-1 != 0  && r != rsize && c-1 != csize){
+                if(list[((r/3)*5)+((c-1)/3)-6] < 65+SIZE){
+                    if(list[((r/3)*5)+((c-1)/3)-6] >= 'R') minus = 66;
+                    Getnum(list[((r/3)*5)+((c-1)/3)-6]-minus);
+                    pboard[r][c] = r2 + 48;
+                }
+            }
+            else if((r-1)%3 == 0 && c%3 == 0 && r-1 != 0 && c != 0  && r-1 != rsize && c != csize){
+                if(list[(((r-1)/3)*5)+(c/3)-6] < 65+SIZE){
+                    if(list[(((r-1)/3)*5)+(c/3)-6] >= 'R') minus = 66;
+                    Getnum(list[(((r-1)/3)*5)+(c/3)-6]-minus);
+                    pboard[r][c] = r3 + 48;
+                }
+            }
+            else if(r%3 == 0 && (c+1)%3 == 0 && r != 0 && c+1 != 0  && r != rsize && c+1 != csize){
+                if(list[((r/3)*5)+((c+1)/3)-6] < 65+SIZE){
+                    if(list[((r/3)*5)+((c+1)/3)-6] >= 'R') minus = 66;
+                    Getnum(list[((r/3)*5)+((c+1)/3)-6]-minus);
+                    pboard[r][c] = r4 + 48;
+                }
+            }
+        }
+    }
+}
+void ShowPuzzle(){
+    PuzzleBoard();
+    cout << "\nPuzzles:";
+    for(int r = 0; r < rsize;r++){          //show board
+        for(int c = 0; c < csize; c++){
+            cout << pboard[r][c];
+        }
+        cout << endl;
+    }
+     cout << endl;
+}
+//1.1
+void GameBoard(){
+    int letter = 65, space = 32, pls= 43, hyphen = 45 , verticalbar = 124 , num = 48;
+
+    for(int r = 0; r < rsize;r++){          //set array to all space
+        for(int c = 0; c < csize; c++){
+            gboard[r][c] = space;
+        }
+    }
+   for(int i = 0; i < csize; i++){          //for ABCDE
+       if(i%3 == 0 && i !=0){
+            gboard[0][i] = letter;
+            letter++;
+       }
+   }
+    for(int i = 1; i < csize; i++){         //for +---------------+'
+        if (i == 1 || i == csize - 1 ){     //for +
+            gboard[1][i] = pls;
+            gboard[rsize-1][i] = pls;
+        }
+        else
+        {                                   //for -
+            gboard[1][i] = hyphen;
+            gboard[rsize-1][i] = hyphen;
+        }
+    }
+    for(int i = 0 ;i < rsize ;i++){         //for 12345
+        if(i%3 == 0 && i !=0){
+            gboard[i][0] = num+1;
+            num++;
+       }
+    }
+    for(int i = 2 ; i < rsize -1 ; i++){    //for |||
+        gboard[i][1] = verticalbar;
+        gboard[i][csize-1] = verticalbar;
+    }
+
+    int r,c;                                //put player entered to board
+    for(r=0;r<=rsize;r++){
+        for(c=0;c<=csize;c++){
+            int minus = 65;
+            if(r%3 == 0 && c%3 == 0 && r != 0 && c != 0  && r != rsize && c != csize){
+                if(entered[((r/3)*5)+(c/3)-6]){
+                    gboard[r][c] = entered[((r/3)*5)+(c/3)-6];
+                }
+            }
+            else if((r+1)%3 == 0 && c%3 == 0 && r+1 != 0 && c != 0  && r+1 != rsize && c != csize){
+                if(entered[(((r+1)/3)*5)+(c/3)-6]){
+                    if(entered[(((r+1)/3)*5)+(c/3)-6] >= 'R') minus = 66;
+                    Getnum(entered[(((r+1)/3)*5)+(c/3)-6]-minus);
+                    gboard[r][c] = r1 + 48;
+                }
+            }
+            else if(r%3 == 0 && (c-1)%3 == 0 && r != 0 && c-1 != 0  && r != rsize && c-1 != csize){
+                if(entered[((r/3)*5)+((c-1)/3)-6]){
+                    if(entered[((r/3)*5)+((c-1)/3)-6] >= 'R') minus = 66;
+                    Getnum(entered[((r/3)*5)+((c-1)/3)-6]-minus);
+                    gboard[r][c] = r2 + 48;
+                }
+            }
+            else if((r-1)%3 == 0 && c%3 == 0 && r-1 != 0 && c != 0  && r-1 != rsize && c != csize){
+                if(entered[(((r-1)/3)*5)+(c/3)-6]){
+                    if(entered[(((r-1)/3)*5)+(c/3)-6] >= 'R') minus = 66;
+                    Getnum(entered[(((r-1)/3)*5)+(c/3)-6]-minus);
+                    gboard[r][c] = r3 + 48;
+                }
+            }
+            else if(r%3 == 0 && (c+1)%3 == 0 && r != 0 && c+1 != 0  && r != rsize && c+1 != csize){
+                if(entered[((r/3)*5)+((c+1)/3)-6]){
+                    if(entered[((r/3)*5)+((c+1)/3)-6] >= 'R') minus = 66;
+                    Getnum(entered[((r/3)*5)+((c+1)/3)-6]-minus);
+                    gboard[r][c] = r4 + 48;
+                }
+            }
+        }
+    }
+}
+void ShowBoard(){
+    GameBoard();
+    cout << "Game Board:\n";
+    for(int r = 0; r < rsize;r++){          //show board
+        for(int c = 0; c < csize; c++){
+            cout << gboard[r][c];
+        }
+        cout << endl;
+    }
+}
+//1.2
+void PuzzlePiece(){
+	srand(time(0));
+	int randrange = DefaultRandomNumber + 1;
+
+	for (int i = 0; i < SIZE; i++) {
+		numbers[i] += (0 + rand() % randrange)*1000;
+		numbers[i] += (0 + rand() % randrange)*100;
+		numbers[i] += (0 + rand() % randrange)*10;
+		numbers[i] += (0 + rand() % randrange);
+
+        Getnum(i);
+        /*
+		cout << "Puzzle " << list[i] << ":" << endl;
+		cout << " " << r1 << endl;
+		cout << r4 << list[i] << r2 << endl;
+		cout << " " << r3 << endl;*/
+	}
+    ShowPuzzle();
+}
+void CheckWin();
+//1.6
+void GameEnd(){
+    bool breaking = false;
+    if(gamending == false){
+        gamending = true;
+    if(won == false){
+            cout << "\nGame over...you lose\n" << "Solution:" << endl;
+
+            int i;
+            for(i=0;i<=25;i++){
+                numbers[i] = 0;
+            }
+            for(i=0;i<SIZE;i++){
+                entered[i] = '\0';
+            }
+            for(i=0;i<SIZE;i++){
+                if(i>=16) entered[i] = i+66;
+                else entered[i] = i+65;
+            }
+            CheckWin();
+            ShowBoard();
+        }
+        else cout << "you win !!!\n" << endl;
+
+        end_time = time(0);//when check win
+        cout << "_______________________________\n";//cout after check win
+        cout << "Time used:" << end_time - start_time << " seconds\n";
+        cout << "_______________________________\n";
+        exit(0);
+    }
+}
+//1.5
+void Qforquit(){
+    char input;
+    while(true){
+        cout << "Quit?(y/n) ";
+        cin >> input;
+        input = toupper(input);
+
+        if(input == 'Y'){GameEnd(); break;}
+        else if (input == 'N') break;
+        else {cout << "invalid input !" << endl; continue;}
+    }
+}
+bool CheckCanPlace(bool winning){
+    if(entered[0] != '\0' && entered[1] != '\0'){ if(gboard[3][4] != gboard[3][5]) winning = false; }                           //A
+    if(entered[0] != '\0' && entered[5] != '\0' && winning == true){ if(gboard[4][3] != gboard[5][3]) winning = false; }
+    if(entered[1] != '\0' && entered[2] != '\0' && winning == true){ if(gboard[3][7] != gboard[3][8]) winning = false; }        //B
+    if(entered[1] != '\0' && entered[6] != '\0' && winning == true){ if(gboard[4][6] != gboard[5][6]) winning = false; }
+    if(entered[2] != '\0' && entered[3] != '\0' && winning == true){ if(gboard[3][10] != gboard[3][11]) winning = false; }      //C
+    if(entered[2] != '\0' && entered[7] != '\0' && winning == true){ if(gboard[4][9] != gboard[5][9]) winning = false; }
+    if(entered[3] != '\0' && entered[4] != '\0' && winning == true){ if(gboard[3][13] != gboard[3][14]) winning = false; }      //D
+    if(entered[3] != '\0' && entered[8] != '\0' && winning == true){ if(gboard[4][12] != gboard[5][12]) winning = false; }
+    if(entered[4] != '\0' && entered[9] != '\0' && winning == true){ if(gboard[4][15] != gboard[5][15]) winning = false; }      //E
+    if(entered[5] != '\0' && entered[6] != '\0' && winning == true){ if(gboard[6][4] != gboard[6][5]) winning = false; }        //F
+    if(entered[5] != '\0' && entered[10] != '\0' && winning == true){ if(gboard[7][3] != gboard[8][3]) winning = false; }
+    if(entered[6] != '\0' && entered[7] != '\0' && winning == true){ if(gboard[6][7] != gboard[6][8]) winning = false; }        //G
+    if(entered[6] != '\0' && entered[11] != '\0' && winning == true){ if(gboard[7][6] != gboard[8][6]) winning = false; }
+    if(entered[7] != '\0' && entered[8] != '\0' && winning == true){ if(gboard[6][10] != gboard[6][11]) winning = false; }      //H
+    if(entered[7] != '\0' && entered[12] != '\0' && winning == true){ if(gboard[7][9] != gboard[8][9]) winning = false; }
+    if(entered[8] != '\0' && entered[9] != '\0' && winning == true){ if(gboard[6][13] != gboard[6][14]) winning = false; }      //I
+    if(entered[8] != '\0' && entered[13] != '\0' && winning == true){ if(gboard[7][12] != gboard[8][12]) winning = false; }
+    if(entered[9] != '\0' && entered[14] != '\0' && winning == true){ if(gboard[7][15] != gboard[8][15]) winning = false; }     //J
+    if(entered[10] != '\0' && entered[11] != '\0' && winning == true){ if(gboard[9][4] != gboard[9][5]) winning = false; }      //K
+    if(entered[10] != '\0' && entered[15] != '\0' && winning == true){ if(gboard[10][3] != gboard[11][3]) winning = false; }
+    if(entered[11] != '\0' && entered[12] != '\0' && winning == true){ if(gboard[9][7] != gboard[9][8]) winning = false; }      //L
+    if(entered[11] != '\0' && entered[16] != '\0' && winning == true){ if(gboard[10][6] != gboard[11][6]) winning = false; }
+    if(entered[12] != '\0' && entered[13] != '\0' && winning == true){ if(gboard[9][10] != gboard[9][11]) winning = false; }    //M
+    if(entered[12] != '\0' && entered[17] != '\0' && winning == true){ if(gboard[10][9] != gboard[11][9]) winning = false; }
+    if(entered[13] != '\0' && entered[14] != '\0' && winning == true){ if(gboard[9][13] != gboard[9][14]) winning = false; }    //N
+    if(entered[13] != '\0' && entered[18] != '\0' && winning == true){ if(gboard[10][12] != gboard[11][12]) winning = false; }
+    if(entered[14] != '\0' && entered[19] != '\0' && winning == true){ if(gboard[10][15] != gboard[11][15]) winning = false; }  //O
+    if(entered[15] != '\0' && entered[16] != '\0' && winning == true){ if(gboard[12][4] != gboard[12][5]) winning = false; }    //P
+    if(entered[15] != '\0' && entered[20] != '\0' && winning == true){ if(gboard[13][3] != gboard[14][3]) winning = false; }
+    if(entered[16] != '\0' && entered[17] != '\0' && winning == true){ if(gboard[12][7] != gboard[12][8]) winning = false; }    //R
+    if(entered[16] != '\0' && entered[21] != '\0' && winning == true){ if(gboard[13][6] != gboard[14][6]) winning = false; }
+    if(entered[17] != '\0' && entered[18] != '\0' && winning == true){ if(gboard[12][10] != gboard[12][11]) winning = false; }  //S
+    if(entered[17] != '\0' && entered[22] != '\0' && winning == true){ if(gboard[13][9] != gboard[14][9]) winning = false; }
+    if(entered[18] != '\0' && entered[19] != '\0' && winning == true){ if(gboard[12][13] != gboard[12][14]) winning = false; }  //T
+    if(entered[18] != '\0' && entered[23] != '\0' && winning == true){ if(gboard[13][12] != gboard[14][12]) winning = false; }
+    if(entered[19] != '\0' && entered[24] != '\0' && winning == true){ if(gboard[13][15] != gboard[14][15]) winning = false; }  //U
+    if(entered[20] != '\0' && entered[21] != '\0' && winning == true){ if(gboard[15][4] != gboard[15][5]) winning = false; }    //V
+    if(entered[21] != '\0' && entered[22] != '\0' && winning == true){ if(gboard[15][7] != gboard[15][8]) winning = false; }    //W
+    if(entered[22] != '\0' && entered[23] != '\0' && winning == true){ if(gboard[15][10] != gboard[15][11]) winning = false; }  //X
+    if(entered[23] != '\0' && entered[24] != '\0' && winning == true){ if(gboard[15][13] != gboard[15][14]) winning = false; }  //Y,Z
+
+    return winning;
+}
+void CheckWin(){
+    int counter, placed = 0;
+    bool winning = true;
+    for(counter=0;counter<25;counter++){
+        if(entered[counter]) placed += 1;
+    }
+    if(placed == SIZE){
+        winning = CheckCanPlace(true);
+        if(winning == true){won = true; GameEnd();}
+    }
+}
+//1.4, 1.3
+void Action(){
+    char puzzle, rotconinue, input, checkrot, place[2], checkplace;
+    while(true){
+        do
+        {
+            ask:
+            cout << "Rotate(R) or place(P) piece of the puzzle? R or P ";
+            cin >> input;
+            input = toupper(input);
+            if (input == 'Q')
+                Qforquit();
+            else if (input != 'R' && input != 'P')
+                cout << "You can only type R or P" << endl;
+
+        } while (input != 'R' && input != 'P');
+        if (input == 'R') {      //if input is R
+            do
+            {
+            do
+            {
+                cout << "\nWhich puzzle do you want to rotate?(A-"<<char('A'+SIZE-1)<<") ";
+                cin >> puzzle;
+                puzzle = toupper(puzzle);
+                checkrot = puzzle;
+                if (puzzle <= 'P' && puzzle >= 'A' && puzzle < 'A'+SIZE)
+                    puzzle = puzzle - 65;
+                else if (puzzle >= 'R' && puzzle <= 'Z' && puzzle < 'A'+SIZE)
+                    puzzle = puzzle - 66;
+                else if (puzzle == 'Q')
+                    Qforquit();
+                else
+                    cout << "invalid input !" << endl;
+            } while (puzzle == 'Q' || checkrot <= 64 || checkrot >= 'A'+SIZE);
+
+                Getnum(puzzle);
+
+                int temp;
+                int* tempPtr = &temp;
+
+                *tempPtr = r4;
+                r4 = r3;
+                r3 = r2;
+                r2 = r1;
+                r1 = *tempPtr;
+                numbers[puzzle] = r1*1000 + r2*100 + r3*10 + r4;
+
+                PuzzleBoard();
+                GameBoard();
+                if(CheckCanPlace(true) == false){
+                    Getnum(puzzle);
+                    int temp2;
+                    int* tempPtr2 = &temp2;
+                    *tempPtr2 = r1;
+                    r1 = r2;
+                    r2 = r3;
+                    r3 = r4;
+                    r4 = *tempPtr2;
+                    numbers[puzzle] = r1*1000 + r2*100 + r3*10 + r4;
+                    cout << checkrot << " cannot be rotate because it will not match near puzzle(s) after rotate\n\n";
+                    PuzzleBoard();
+                    ShowPuzzle();
+                    GameBoard();
+                    goto ask;
+                }
+
+                ShowPuzzle();
+                ShowBoard();
+                CheckWin();
+
+                do
+                {
+                    cout << "Continue? Y or N ";
+                    cin >> rotconinue;
+                    rotconinue = toupper(rotconinue);
+                    if (rotconinue == 'Q')
+                        Qforquit();
+                    else if (rotconinue != 'Y' && rotconinue != 'N')
+                        cout << "You can only type Y or N" << endl;
+
+                } while (rotconinue != 'Y' && rotconinue != 'N');
+            } while ((rotconinue == 'Y'));
+        }
+        else if (input == 'P') {     //if input is P
+            do
+            {
+                do
+                {
+                    cout << "\nWhich piece of puzzle do you want to place/take?(A-"<<char('A'+SIZE-1)<<") ";
+                    cin >> puzzle;
+                    puzzle = toupper(puzzle);
+                    checkplace = puzzle;
+                    if (puzzle <= 'P' && puzzle >= 'A' && puzzle < 'A'+SIZE)
+                        puzzle = puzzle - 65;
+                    else if (puzzle >= 'R' && puzzle <= 'Z' && puzzle < 'A'+SIZE)
+                        puzzle = puzzle - 66;
+                    else if (puzzle == 'Q')
+                        Qforquit();
+                    else
+                        cout << "invalid input !" << endl;
+                } while (puzzle == 'Q' || checkplace <= 64 || checkplace >= 'A'+SIZE);
+
+                Getnum(puzzle);
+
+                if(puzzle <= 17) puzzle += 65;
+                else puzzle += 66;
+                int i;
+                bool took = false;
+                for(i=0;i<SIZE;i++){
+                    if(entered[i] == puzzle){
+                        entered[i] = '\0';
+                        took = true;
+                    }
+                }
+
+                int where;
+                while(took == false)
+                {
+                    cout << "Which place do you want to place?(eg:A1,E5) ";
+                    cin >> place;
+
+                    where = GetPlace(place);
+                    if(where == 99){ cout << "invalid input !" << endl; continue;}
+                    entered[where] = puzzle;
+                    took = true;
+                }
+
+                PuzzleBoard();
+                GameBoard();
+                if(CheckCanPlace(true) == false){
+                    entered[where] = '\0';
+                    cout << "\n" << checkplace << " cannot place to " << place << " because it will not match near puzzle(s)\n\n";
+                    PuzzleBoard();
+                    GameBoard();
+                    goto ask;
+                }
+                ShowPuzzle();
+                ShowBoard();
+                CheckWin();
+
+                do
+                {
+                    cout << "Continue? Y or N ";
+                    cin >> rotconinue;
+                    rotconinue = toupper(rotconinue);
+                    if (rotconinue == 'Q')
+                        Qforquit();
+                    else if (rotconinue != 'Y' && rotconinue != 'N')
+                        cout << "You can only type Y or N" << endl;
+
+                } while (rotconinue != 'Y' && rotconinue != 'N');
+            } while ((rotconinue == 'Y'));
+        }
+    }
+}
+//R2
+void R2Function(){
+	int R2option; //R2 Setting Menu option
+	int ChangePieces; //R2.1 change the number of puzzle pieces
+    int ChangeRandomNumber; //R2.2 change the range of random numbers
+
+
+	do {
+		cout << "\n*** Settings Menu ***" << endl;
+		cout << "[1] Number of puzzle pieces" << endl;
+		cout << "[2] Range of random numbers" << endl;
+		cout << "[3] Return to Main Menu" << endl;
+		cout << "*********************" << endl;
+		cout << "Option (1-3) :" ;
+		cin >> R2option;
+
+		switch (R2option) {
+		case 1:
+			do
+			{
+			cout << "\n The valid input number should be in the range within 1 to 25. \n";
+			cout << " Please input the number: ";
+			cin >> ChangePieces;
+			cout << endl;
+		    } while (ChangePieces < 1 || ChangePieces > 25);
+
+		    SIZE = ChangePieces;
+			cout << endl;
+			break;
+		case 2:
+			do
+			{
+			cout << "\nThe valid range of random numbers can be within 0 to 9. \n";
+			cout << "Up to 10 numbers can be selected. \n";
+			cout << "A range containing 1 number is also valid. \n";
+			cout << "Please input the size of the range: ";
+			cin >> ChangeRandomNumber;
+			cout << endl;
+		    } while (ChangeRandomNumber < 1 || ChangeRandomNumber > 10);
+
+		    DefaultRandomNumber = ChangeRandomNumber;
+			cout << endl;
+			break;
+		case 3:
+//			cout << " Back Main Menu!!!! \n";
+			break;
+		default:
+			cout << "\nIncorrect option. \n";
+			cout << "Please input option 1-3 \n";
+			cout << endl;
+		}
+	} while ( R2option != 3);
+//	R0Function();
+}
+//R3
+void feature(){
+	int R2option; //R3 Menu option
+	int i;
+
+	do {
+		cout << "\n*** Other Feature Menu ***" << endl;
+		cout << "[1] Game rule" << endl;
+		cout << "[2] Show settings" << endl;
+		cout << "[3] Return to Main Menu" << endl;
+		cout << "*********************" << endl;
+		cout << "Option (1-3) :" ;
+		cin >> R2option;
+
+		switch (R2option) {
+		case 1:
+		    cout << "\nGame Rules: " << endl;
+            cout << "1. Player can rotate or place/take a piece of puzzle to the game board" << endl;
+            cout << "\t(i)  Can only place or rotate when the numbers that next to each other are the same" << endl;
+            cout << "\t(ii) Each puzzle can only place in one place in the game board" << endl;
+            cout << "2. Player will win when:" << endl;
+            cout << "\t(i)  All puzzle have been placed into the game board" << endl;
+            cout << "\t(ii) The numbers that inside game board which next to each other need to be the same number" << endl;
+			break;
+		case 2:
+		    cout << "\nPuzzle pieces: " << SIZE << endl;
+		    cout << "Puzzle number random range: 0-" << DefaultRandomNumber << endl;
+		    cout << "Game board size: 5x5" << endl;
+		    cout << "Puzzles: ";
+		    for(i=0;i<SIZE;i++){
+                cout << list[i] << " ";
+            }
+            cout << endl;
+			break;
+		case 3: break;
+		default:
+			cout << "\nIncorrect option. \n";
+			cout << "Please input option 1-3 \n";
+			cout << endl;
+		}
+	} while ( R2option != 3);
+}
+
+int main(){
+    int option;
+    start:
+
+    cout << endl;
+	cout << "#    # ###### #       ####   ####  #    # ###### \n";
+	cout << "#    # #      #      #    # #    # ##  ## #      \n";
+	cout << "#    # #####  #      #      #    # # ## # #####  \n";
+	cout << "# ## # #      #      #      #    # #    # #      \n";
+	cout << "##  ## #      #      #    # #    # #    # #      \n";
+	cout << "#    # ###### ######  ####   ####  #    # ###### \n";
+    cout << "\t\t (�٣s��)/ \n\n";
+
+    cout << "*** Main Menu ***\n" << "[1] Start Game\n" << "[2] Settings\n"  << "[3] Useful feature(s) added\n"   << "[4] Exit\n" << " *****************\n" ;
+    cout << "Option(1 - 4) : ";
+    cin >> option;
+
+    switch (option)
+    {
+    case 1:
+        start_time = time(0);   //when game start
+        PuzzlePiece();  //1.2
+        ShowBoard();    //1.1
+        Action();       //1.3,1.4,1.5,1.6
+        break;
+    case 2: R2Function(); goto start;   //R2
+    case 3: feature(); goto start;      //R3
+    case 4: end(); break;
+    default: cout << "invalid input !" << endl; break;
+    }
+}
+
+void end(){
+    start:
+    char quit;
+    cout << "Do you want to quit the game?(y/n) ";
+    cin >> quit;
+    if (quit == 'y' || quit == 'Y')
+        exit(0);
+    else if (quit == 'n' || quit == 'N')
+        main();
+    else{ cout << "invalid input !" << endl; goto start; }
+}
+
